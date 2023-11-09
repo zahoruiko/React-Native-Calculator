@@ -1,6 +1,6 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# An example of an input form with validation in React Native
+# Example of calculator implementation in React Native application
 
 # Getting Started
 
