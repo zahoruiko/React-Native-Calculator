@@ -16,20 +16,20 @@ export default CalculatorDisplay;
 
 const styles = StyleSheet.create({
   displayWrapper: {
-    margin: 'auto',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FAE5D3',
+    backgroundColor: '#EDBB99',
     borderColor: '#EDBB99',
     borderWidth: 1,
-    height: 15,
+    height: 30,
     justifyContent: 'flex-end',
     paddingRight: 10,
     paddingLeft: 10,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
-    marginLeft: 15,
-    marginRight: 20,
+    marginBottom: 15,
+    marginLeft: 5,
+    marginRight: 5,
 
     shadowColor: '#000000',
     shadowOffset: {
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.17,
     shadowRadius: 3.05,
-    elevation: 4
+    elevation: 4,
   },
   displayText: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: 'bold',
     fontFamily: 'ZenDots-Regular',
-    color: '#555'
+    color: '#555',
   }
 });

@@ -10,12 +10,14 @@ export default CalculatorUIWrapper;
 const styles = StyleSheet.create({
   calculatorUIWrapper: {
     flexDirection: 'column',
-    flexWrap: 'wrap',
-    height: 645,
+    height: 650,
     width: 380,
     borderColor: 'lightgray',
     borderWidth: 2,
     backgroundColor: '#FEF5E7',
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 15,
 
     shadowColor: '#000000',
     shadowOffset: {

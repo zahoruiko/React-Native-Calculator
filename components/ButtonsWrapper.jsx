@@ -13,12 +13,11 @@ export default ButtonsWrapper;
 
 const styles = StyleSheet.create({
   buttonsWrapper: {
-    height: 415,
-    marginTop: 40,
+    height: 390,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    padding: 10,
-    paddingBottom: 20,
+    padding: 0,
+    paddingBottom: 0,
   }
 });

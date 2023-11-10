@@ -29,11 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAE5D3',
     borderColor: '#F5CBA7',
     borderWidth: 1,
-    marginLeft: 15,
-    marginRight: 20,
-    marginBottom: 17,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    marginLeft: 5,
+    marginRight: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
 
     shadowColor: '#000000',
     shadowOffset: {

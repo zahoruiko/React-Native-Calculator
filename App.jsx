@@ -3,9 +3,11 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import Button from './components/Button';
 import ButtonsWrapper from './components/ButtonsWrapper';
 import CalculationsList from './components/CalculationsList';
+import CalculatorDisplay from './components/CalculatorDisplay';
 import CalculatorTitle from './components/CalculatorTitle';
 import CalculatorUIWrapper from './components/CalculatorUIWrapper';
-import CalculatorDisplay from './components/CalculatorDisplay';
+import { commaSeparateNumber } from './utils/numbersFormatter';
+
 
 function App() {
   const [inputField, setInputField] = useState([]);
@@ -63,10 +65,13 @@ function App() {
           setAccumulator(0);
           return [];
         });
-        return '';
+        return ''; 
       });
       setCalculationsListData([...calculationsListData, '---------------']);
-      return;
+      return; // If we do not return from here, then the accumulator and input field states does not have time to reset, 
+      // since they works asynchronously. As a result, new digits will be entered in addition to the current value 
+      // in the input field and in the accumulator.
+      // This problem can be solved by using a class component to be able to change values synchronously.
     }
 
     if (value === '.' && !inputField.includes('.')) {
@@ -96,7 +101,7 @@ function App() {
     if (operation === '=') {
       setCalculationsListData([...calculationsListData, value]);
     } else {
-      setCalculationsListData([...calculationsListData, inputField.join(''), value]);
+      setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value]);
     }
     if (operation === '') {
       setAccumulator(+inputField.join(''));
@@ -119,7 +124,11 @@ function App() {
       setOperation('=');
       setAccumulator(prevValue => {
         setInputField(() => {
-          setCalculationsListData([...calculationsListData, inputField.join(''), value, prevValue]);
+          if(accumulator !== +inputField.join('')) {
+            setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value, commaSeparateNumber(prevValue)]);
+          } else {
+            setCalculationsListData([...calculationsListData, value, commaSeparateNumber(prevValue)]);
+          }
           return String(prevValue).split('');
         });
         return prevValue;
@@ -128,7 +137,7 @@ function App() {
       if (operation === '=') {
         setCalculationsListData([...calculationsListData, value]);
       } else {
-        setCalculationsListData([...calculationsListData, inputField.join(''), value]);
+        setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value]);
       }
     }
   };
