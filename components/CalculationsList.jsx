@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingRight: 10,
     paddingLeft: 10,
-    marginBottom: 5
+    marginTop: 5,
+    marginBottom: 5,
   },
   displayText: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 15,
+    fontFamily: 'ZenDots-Regular',
+    color: '#555'
   },
   listItemWrapper: {
-
   }
 });

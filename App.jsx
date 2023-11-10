@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
+import Button from './components/Button';
+import ButtonsWrapper from './components/ButtonsWrapper';
+import CalculationsList from './components/CalculationsList';
+import CalculatorTitle from './components/CalculatorTitle';
 import CalculatorUIWrapper from './components/CalculatorUIWrapper';
 import CalculatorDisplay from './components/CalculatorDisplay';
-import ButtonsWrapper from './components/ButtonsWrapper';
-import Button from './components/Button';
-import CalculatorTitle from './components/CalculatorTitle';
-import CalculationsList from './components/CalculationsList';
 
 function App() {
   const [inputField, setInputField] = useState([]);

@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   titleText: {
-    fontSize: 26,
-    fontWeight: 'bold'
+    fontSize: 16,
+    fontFamily: 'ZenDots-Regular',
+    color: '#555'
   }
 });

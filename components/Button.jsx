@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
     elevation: 3
   },
   buttonTitle: {
-    fontSize: 34,
+    fontSize: 24,
     fontWeight: '400',
-    color: '#555'
+    color: '#555',
+    fontFamily: 'ZenDots-Regular',
   }
 });

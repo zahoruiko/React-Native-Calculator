@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { commaSeparateNumber } from '../utils/numbersFormatter';
 
 const CalculatorDisplay = ({ data }) => {
   let displayContent = '';
-  if (data.length > 0) displayContent = data.join('');
-
+  if (data.length > 0) displayContent = +data.join('');
   return (
     <View style={styles.displayWrapper}>
-      <Text style={styles.displayText}>{displayContent}</Text>
+      <Text style={styles.displayText}>{commaSeparateNumber(displayContent)}</Text>
     </View>
   );
 };
@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   displayText: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'ZenDots-Regular',
+    color: '#555'
   }
 });
