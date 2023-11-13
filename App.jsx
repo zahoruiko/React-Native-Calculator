@@ -86,9 +86,9 @@ function App() {
           setInputField([value]);
         } else if (inputField.length > 0 && value === '0') {
           if(inputField.length === 1 && inputField[0] === '0') {
-            setInputField([String(value)]);
+            setInputField([value]);
           } else {
-            setInputField([...inputField, String(value)]);
+            setInputField([...inputField, value]);
           }
         } else if (value !== '0') {
           if (inputField.length === 0) {
