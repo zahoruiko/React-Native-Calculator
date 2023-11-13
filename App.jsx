@@ -27,7 +27,7 @@ function App() {
   };
 
   const handlePlusMinusButton = () => {
-    setInputField(prevValue => {
+    setInputField((prevValue) => {
       if (prevValue.length > 0 && +prevValue.join('') !== 0) {
         if (prevValue[0] !== '-') {
           prevValue.unshift('-');
@@ -37,20 +37,27 @@ function App() {
       }
       return [...prevValue];
     });
-    if(operation === '=')
-      setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join(''))]);
+
+    if (operation === '=') {
+      if(inputField.length !== 0) {
+        setCalculationsListData([
+          ...calculationsListData,
+          commaSeparateNumber(+inputField.join('')),
+        ]);
+      }
+    }
   };
 
   const handlePercentButton = () => {
-    setAccumulator(prevValue => {
-      setInputField(prevValue2 => {
+    setAccumulator((prevValue) => {
+      setInputField((prevValue2) => {
         return [...String((prevValue / 100) * +prevValue2.join('')).split('')];
       });
       return prevValue;
     });
   };
 
-  const handleNumberButton = value => {
+  const handleNumberButton = (value) => {
     const inputValue = inputField.join('');
     if (inputValue === 'Infinity' || inputValue === 'NaN') {
       setInputField(() => {
@@ -61,17 +68,10 @@ function App() {
 
     if (operation === '=') {
       setOperation(() => {
-        setInputField(() => {
-          setAccumulator(0);
-          return [];
-        });
+        setAccumulator(0);
         return '';
       });
       setCalculationsListData([...calculationsListData, '---------------']);
-      return; // If we do not return from here, then the accumulator and input field states does not have time to reset,
-      // since they works asynchronously. As a result, new digits will be entered in addition to the current value
-      // in the input field and in the accumulator.
-      // This problem can be solved by using a class component to be able to change values synchronously.
     }
 
     if (inputField.length <= 19) {
@@ -87,7 +87,9 @@ function App() {
         } else if (inputField.length > 0 && value === '0') {
           if (
             (inputField.length === 1 && inputField[0] === '0') ||
-            (inputField.length === 2 && inputField[0] === '-' && inputField[1] === '0')
+            (inputField.length === 2 &&
+              inputField[0] === '-' &&
+              inputField[1] === '0')
           ) {
             setInputField([value]);
           } else {
@@ -100,7 +102,9 @@ function App() {
             if (inputField[0] === '0') {
               if (
                 (inputField[0] === '0' && inputField[1] === '.') ||
-                (inputField[0] === '-' && inputField[1] === '0' && inputField[2] === '.')
+                (inputField[0] === '-' &&
+                  inputField[1] === '0' &&
+                  inputField[2] === '.')
               ) {
                 setInputField([...inputField, value]);
               } else {
@@ -115,11 +119,15 @@ function App() {
     }
   };
 
-  const handleOperationButton = value => {
+  const handleOperationButton = (value) => {
     if (operation === '=') {
       setCalculationsListData([...calculationsListData, value]);
     } else {
-      setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value]);
+      setCalculationsListData([
+        ...calculationsListData,
+        commaSeparateNumber(+inputField.join('')),
+        value,
+      ]);
     }
 
     if (operation === '') {
@@ -128,13 +136,13 @@ function App() {
       setOperation(value);
     } else {
       if (operation === '+') {
-        setAccumulator(prevState => prevState + +inputField.join(''));
+        setAccumulator((prevState) => prevState + +inputField.join(''));
       } else if (operation === '-') {
-        setAccumulator(prevState => prevState - +inputField.join(''));
+        setAccumulator((prevState) => prevState - +inputField.join(''));
       } else if (operation === 'x') {
-        setAccumulator(prevState => prevState * +inputField.join(''));
+        setAccumulator((prevState) => prevState * +inputField.join(''));
       } else if (operation === '/') {
-        setAccumulator(prevState => prevState / +inputField.join(''));
+        setAccumulator((prevState) => prevState / +inputField.join(''));
       }
       setOperation(value);
       setInputField([]);
@@ -142,19 +150,24 @@ function App() {
 
     if (value === '=') {
       setOperation('=');
-      setAccumulator(prevValue => {
+      setAccumulator((prevValue) => {
         setInputField(() => {
           if (accumulator !== +inputField.join('')) {
             setCalculationsListData([
               ...calculationsListData,
               commaSeparateNumber(+inputField.join('')),
               value,
-              commaSeparateNumber(prevValue)
+              commaSeparateNumber(prevValue),
             ]);
           } else {
-            setCalculationsListData([...calculationsListData, commaSeparateNumber(accumulator), value, commaSeparateNumber(prevValue)]);
+            setCalculationsListData([
+              ...calculationsListData,
+              commaSeparateNumber(accumulator),
+              value,
+              commaSeparateNumber(prevValue),
+            ]);
           }
-          return String(prevValue).split('');
+          return [];
         });
         return prevValue;
       });
@@ -162,7 +175,11 @@ function App() {
       if (operation === '=') {
         setCalculationsListData([...calculationsListData, value]);
       } else {
-        setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value]);
+        setCalculationsListData([
+          ...calculationsListData,
+          commaSeparateNumber(+inputField.join('')),
+          value,
+        ]);
       }
     }
   };
