@@ -8,7 +8,6 @@ import CalculatorTitle from './components/CalculatorTitle';
 import CalculatorUIWrapper from './components/CalculatorUIWrapper';
 import { commaSeparateNumber } from './utils/numbersFormatter';
 
-
 function App() {
   const [inputField, setInputField] = useState([]);
   const [accumulator, setAccumulator] = useState(0);
@@ -36,9 +35,10 @@ function App() {
           prevValue.shift();
         }
       }
-      setAccumulator(+prevValue.join(''));
       return [...prevValue];
     });
+    if(operation === '=')
+      setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join(''))]);
   };
 
   const handlePercentButton = () => {
@@ -65,16 +65,16 @@ function App() {
           setAccumulator(0);
           return [];
         });
-        return ''; 
+        return '';
       });
       setCalculationsListData([...calculationsListData, '---------------']);
-      return; // If we do not return from here, then the accumulator and input field states does not have time to reset, 
-      // since they works asynchronously. As a result, new digits will be entered in addition to the current value 
+      return; // If we do not return from here, then the accumulator and input field states does not have time to reset,
+      // since they works asynchronously. As a result, new digits will be entered in addition to the current value
       // in the input field and in the accumulator.
       // This problem can be solved by using a class component to be able to change values synchronously.
     }
 
-    if (inputField.length <= 19) { 
+    if (inputField.length <= 19) {
       if (value === '.' && !inputField.includes('.')) {
         if (value === '.' && inputField.length === 0) {
           setInputField([0, value]);
@@ -85,7 +85,10 @@ function App() {
         if (inputField.length === 0 && value === '0') {
           setInputField([value]);
         } else if (inputField.length > 0 && value === '0') {
-          if(inputField.length === 1 && inputField[0] === '0') {
+          if (
+            (inputField.length === 1 && inputField[0] === '0') ||
+            (inputField.length === 2 && inputField[0] === '-' && inputField[1] === '0')
+          ) {
             setInputField([value]);
           } else {
             setInputField([...inputField, value]);
@@ -95,7 +98,10 @@ function App() {
             setInputField([value]);
           } else {
             if (inputField[0] === '0') {
-              if(inputField[0] === '0' && inputField[1] === '.') {
+              if (
+                (inputField[0] === '0' && inputField[1] === '.') ||
+                (inputField[0] === '-' && inputField[1] === '0' && inputField[2] === '.')
+              ) {
                 setInputField([...inputField, value]);
               } else {
                 setInputField([value]);
@@ -104,7 +110,7 @@ function App() {
               setInputField([...inputField, value]);
             }
           }
-        } 
+        }
       }
     }
   };
@@ -115,6 +121,7 @@ function App() {
     } else {
       setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value]);
     }
+
     if (operation === '') {
       setAccumulator(+inputField.join(''));
       setInputField([]);
@@ -132,14 +139,20 @@ function App() {
       setOperation(value);
       setInputField([]);
     }
+
     if (value === '=') {
       setOperation('=');
       setAccumulator(prevValue => {
         setInputField(() => {
-          if(accumulator !== +inputField.join('')) {
-            setCalculationsListData([...calculationsListData, commaSeparateNumber(+inputField.join('')), value, commaSeparateNumber(prevValue)]);
+          if (accumulator !== +inputField.join('')) {
+            setCalculationsListData([
+              ...calculationsListData,
+              commaSeparateNumber(+inputField.join('')),
+              value,
+              commaSeparateNumber(prevValue)
+            ]);
           } else {
-            setCalculationsListData([...calculationsListData, value, commaSeparateNumber(prevValue)]);
+            setCalculationsListData([...calculationsListData, commaSeparateNumber(accumulator), value, commaSeparateNumber(prevValue)]);
           }
           return String(prevValue).split('');
         });
