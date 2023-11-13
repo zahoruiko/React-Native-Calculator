@@ -4,7 +4,7 @@ import { commaSeparateNumber } from '../utils/numbersFormatter';
 
 const CalculatorDisplay = ({ data }) => {
   let displayContent = '';
-  if (data.length > 0) displayContent = +data.join('');
+  if (data.length > 0) displayContent = data.join('');
   return (
     <View style={styles.displayWrapper}>
       <Text style={styles.displayText}>{commaSeparateNumber(displayContent)}</Text>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   displayText: {
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'ZenDots-Regular',
     color: '#555',

@@ -12,7 +12,7 @@ const CalculationsList = ({ data }) => {
       <View style={styles.listWrapper}>
         {data.map((item, id) => {
           return (
-            <View key={id} style={styles.listItemWrapper}>
+            <View key={id + 1} style={styles.listItemWrapper}>
               <Text style={styles.displayText}>{item}</Text>
             </View>
           );

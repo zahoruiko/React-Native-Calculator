@@ -74,25 +74,37 @@ function App() {
       // This problem can be solved by using a class component to be able to change values synchronously.
     }
 
-    if (value === '.' && !inputField.includes('.')) {
-      if (value === '.' && inputField.length === 0) {
-        setInputField([...inputField, 0, value]);
-      } else {
-        setInputField([...inputField, value]);
-      }
-    } else if (value !== '.') {
-      if (inputField.length > 0 && value === '0') {
-        setInputField([...inputField, value]);
-      } else if (value !== '0') {
-        if (inputField.length === 0) {
-          setInputField([value]);
+    if (inputField.length <= 19) { 
+      if (value === '.' && !inputField.includes('.')) {
+        if (value === '.' && inputField.length === 0) {
+          setInputField([0, value]);
         } else {
-          if (inputField[0] === '0') {
+          setInputField([...inputField, value]);
+        }
+      } else if (value !== '.') {
+        if (inputField.length === 0 && value === '0') {
+          setInputField([value]);
+        } else if (inputField.length > 0 && value === '0') {
+          if(inputField.length === 1 && inputField[0] === '0') {
+            setInputField([String(value)]);
+          } else {
+            setInputField([...inputField, String(value)]);
+          }
+        } else if (value !== '0') {
+          if (inputField.length === 0) {
             setInputField([value]);
           } else {
-            setInputField([...inputField, value]);
+            if (inputField[0] === '0') {
+              if(inputField[0] === '0' && inputField[1] === '.') {
+                setInputField([...inputField, value]);
+              } else {
+                setInputField([value]);
+              }
+            } else {
+              setInputField([...inputField, value]);
+            }
           }
-        }
+        } 
       }
     }
   };
