@@ -26,9 +26,7 @@ yarn start
 ```
 ## Result
 
-### Initial form view
-
-<img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/appImages/Screen-1.png" width="240" />
+### Demo
 
 <img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/appImages/video.gif" width="240" />
 
