@@ -30,3 +30,5 @@ yarn start
 
 <img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/appImages/Screen-1.png" width="240" />
 
+<img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/appImages/video.gif" width="240" />
+

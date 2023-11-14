@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
   displayText: {
     fontSize: 15,
+    lineHeight: 18,
     fontFamily: 'ZenDots-Regular',
     color: '#555'
   },

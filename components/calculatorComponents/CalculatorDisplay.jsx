@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { commaSeparateNumber } from '../utils/numbersFormatter';
+import { commaSeparateNumber } from '../../utils/numbersFormatter';
 
 const CalculatorDisplay = ({ data }) => {
   let displayContent = '';
@@ -16,21 +16,21 @@ export default CalculatorDisplay;
 
 const styles = StyleSheet.create({
   displayWrapper: {
+    height: 38,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-end',
     backgroundColor: '#EDBB99',
     borderColor: '#EDBB99',
     borderWidth: 1,
-    height: 30,
-    justifyContent: 'flex-end',
-    paddingRight: 10,
-    paddingLeft: 10,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
+    paddingRight: 10,
+    paddingLeft: 10,
     marginBottom: 15,
     marginLeft: 5,
     marginRight: 5,
-
+    padding: 3,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'ZenDots-Regular',
+    lineHeight: 30,
     color: '#555',
   }
 });

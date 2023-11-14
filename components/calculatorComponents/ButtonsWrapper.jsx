@@ -13,7 +13,7 @@ export default ButtonsWrapper;
 
 const styles = StyleSheet.create({
   buttonsWrapper: {
-    height: 390,
+    height: 300,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
