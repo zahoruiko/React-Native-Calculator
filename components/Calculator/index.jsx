@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { commaSeparateNumber } from '../utils/numbersFormatter';
-import CalculatorUI from './calculatorComponents/CalculatorUI';
+import { commaSeparateNumber } from './components/utils/numbersFormatter';
+import CalculatorUI from './components/CalculatorUI';
 
 function Calculator() {
   const [inputField, setInputField] = useState([]);
