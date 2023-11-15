@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     paddingRight: 10,
     paddingLeft: 10,
-    marginBottom: 15,
+    marginBottom: 10,
     marginLeft: 5,
     marginRight: 5,
     padding: 3,
