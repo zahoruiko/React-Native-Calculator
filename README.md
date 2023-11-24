@@ -28,5 +28,5 @@ yarn start
 
 ### Demo
 
-<img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/appImages/video.gif" width="240" />
+<img src="https://github.com/zahoruiko/React-Native-Calculator/blob/main/gitImages/video.gif" width="240" />
 
