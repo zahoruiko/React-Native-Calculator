@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-const CalculationsList = ({ data }) => {
+type TCalculationsListProps = {
+  data: string[];
+}
+
+const CalculationsList: React.FC<TCalculationsListProps> = ({ data }) => {
   const scrollViewRef = useRef();
   return (
     <ScrollView

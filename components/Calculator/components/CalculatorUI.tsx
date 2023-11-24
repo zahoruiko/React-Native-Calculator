@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import { Dimensions, SafeAreaView, StyleSheet } from 'react-native';
-import Button from '../keyboard/Button';
-import ButtonsRowWrapper from '../keyboard/ButtonsRowWrapper';
-import CalculationsList from './CalculationsList';
-import CalculatorDisplay from './CalculatorDisplay';
-import CalculatorTitle from '../CalculatorTitle';
-import CalculatorUIWrapper from '../CalculatorUIWrapper';
-import DisplayWrapper from './DisplayWrapper';
-import KeyboardWrapper from '../keyboard/KeyboardWrapper';
-import MemoryInfo from './MemoryInfo';
+import Button from './keyboard/Button';
+import ButtonsRowWrapper from './keyboard/ButtonsRowWrapper';
+import CalculationsList from './display/CalculationsList';
+import CalculatorDisplay from './display/CalculatorDisplay';
+import CalculatorTitle from './CalculatorTitle';
+import CalculatorUIWrapper from './CalculatorUIWrapper';
+import DisplayWrapper from './display/DisplayWrapper';
+import KeyboardWrapper from './keyboard/KeyboardWrapper';
+import MemoryInfo from './display/MemoryInfo';
 
-function CalculatorUI({
+type TCalculatorUIProps = {
+  calculationsListData: string[];
+  inputField: string[];
+  handleClearAllButton: () => void;
+  handleClearLastButton: () => void;
+  handleNumberButton: (value: string) => void;
+  handleOperationButton: (value: string) => void;
+  handlePercentButton: () => void;
+  handlePlusMinusButton: () => void;
+  handleOperationWithMemory: (memoryOperation: string) => void;
+  memoryInfoData: number;
+}
+
+const CalculatorUI: React.FC<TCalculatorUIProps> = ({
   calculationsListData,
   inputField,
   handleClearAllButton,
@@ -21,7 +34,7 @@ function CalculatorUI({
   handlePlusMinusButton,
   handleOperationWithMemory,
   memoryInfoData
-}) {
+}) => {
   const [isLandscape, setIsLandscape] = useState(false);
 
   const determineOrientation = () => {
@@ -78,12 +91,12 @@ function CalculatorUI({
             />
             <Button
               handler={() => handleClearLastButton()}
-              buttonTitle={'BS'}
+              buttonTitle={'⇦'}
               optionalStyle={styles.clearButton}
               isLandscape={isLandscape}
             />
             <Button
-              handler={() => handlePercentButton('%')}
+              handler={() => handlePercentButton()}
               buttonTitle={'%'}
               optionalStyle={styles.operationButton}
               isLandscape={isLandscape}
@@ -142,7 +155,7 @@ function CalculatorUI({
             />
             <Button
               handler={() => handleOperationButton('x')}
-              buttonTitle={'x'}
+              buttonTitle={'×'}
               optionalStyle={styles.operationButton}
               isLandscape={isLandscape}
             />
@@ -169,7 +182,7 @@ function CalculatorUI({
             />
             <Button
               handler={() => handleOperationButton('/')}
-              buttonTitle={'/'}
+              buttonTitle={'÷'}
               optionalStyle={styles.operationButton}
               isLandscape={isLandscape}
             />
@@ -188,8 +201,8 @@ function CalculatorUI({
               isLandscape={isLandscape}
             />
             <Button
-              handler={() => handlePlusMinusButton('+/-')}
-              buttonTitle={'+/-'}
+              handler={() => handlePlusMinusButton()}
+              buttonTitle={'±'}
               optionalStyle={styles.operationButton}
               isLandscape={isLandscape}
             />
@@ -211,7 +224,7 @@ export default CalculatorUI;
 const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center', 
     alignItems: 'center'
   },
   numberButton: {
@@ -221,7 +234,7 @@ const styles = StyleSheet.create({
     color: '#2E86C1'
   },
   clearButton: {
-    color: '#A93226',
+    color: 'red',
     fontSize: 21
   },
   memoryButton: {

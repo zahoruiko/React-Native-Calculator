@@ -1,7 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-const KeyboardWrapper = ({ children, isLandscape }) => {
+type TKeyboardWrapperProps = {
+  children: JSX.Element | JSX.Element[];
+  isLandscape: boolean;
+}
+
+const KeyboardWrapper: React.FC<TKeyboardWrapperProps> = ({ children, isLandscape }) => {
   const styles = isLandscape ? landscapeStyles : portraitStyles;
   return (
     <View style={styles.keyboardWrapper}>

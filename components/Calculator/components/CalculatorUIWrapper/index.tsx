@@ -2,7 +2,12 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { isPhone } from '../utils/device';
 
-const CalculatorUIWrapper = ({ children, isLandscape }) => {
+type TCalculatorUIWrapperProps = {
+  children: JSX.Element|JSX.Element[];
+  isLandscape: boolean;
+}
+
+const CalculatorUIWrapper: React.FC<TCalculatorUIWrapperProps> = ({ children, isLandscape }) => {
   let styles;
   if (isPhone()) {
     styles = isLandscape ? phoneLandscapeStyles : phonePortraitStyles;

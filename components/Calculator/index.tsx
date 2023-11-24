@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { commaSeparateNumber } from './components/utils/numbersFormatter';
-import CalculatorUI from './components/display/CalculatorUI';
+import CalculatorUI from './components/CalculatorUI';
 
 function Calculator() {
-  const [inputField, setInputField] = useState([]);
-  const [accumulator, setAccumulator] = useState(0);
-  const [operation, setOperation] = useState('');
-  const [calculationsListData, setCalculationsListData] = useState([]);
-  const [calculatorMemory, setCalculatorMemory] = useState(0);
+  const [inputField, setInputField] = useState<string[]>([]);
+  const [accumulator, setAccumulator] = useState<number>(0);
+  const [operation, setOperation] = useState<string>('');
+  const [calculationsListData, setCalculationsListData] = useState<string[]>([]);
+  const [calculatorMemory, setCalculatorMemory] = useState<number>(0);
 
   const handleClearAllButton = () => {
     setInputField([]);
@@ -49,7 +49,7 @@ function Calculator() {
     });
   };
 
-  const handleNumberButton = value => {
+  const handleNumberButton = (value: string) => {
     const inputValue = inputField.join('');
     if (inputValue === 'Infinity' || inputValue === 'NaN') {
       setInputField(() => {
@@ -69,7 +69,7 @@ function Calculator() {
     if (inputField.length <= 19) {
       if (value === '.' && !inputField.includes('.')) {
         if (value === '.' && inputField.length === 0) {
-          setInputField([0, value]);
+          setInputField(['0', value]);
         } else {
           setInputField([...inputField, value]);
         }
@@ -107,7 +107,7 @@ function Calculator() {
     }
   };
 
-  const handleOperationButton = value => {
+  const handleOperationButton = (value: string) => {
     if (operation === '=') {
       setCalculationsListData([...calculationsListData, value]);
     } else {
@@ -172,7 +172,7 @@ function Calculator() {
     }
   };
 
-  const handleOperationWithMemory = (memoryOperation) => {
+  const handleOperationWithMemory = (memoryOperation: string) => {
     switch (memoryOperation) {
       case 'MC': {
         setCalculatorMemory(0);

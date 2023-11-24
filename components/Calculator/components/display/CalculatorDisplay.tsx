@@ -2,7 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { commaSeparateNumber } from '../utils/numbersFormatter';
 
-const CalculatorDisplay = ({ data }) => {
+type TCalculatorDisplayProps = {
+  data: string[];
+}
+
+const CalculatorDisplay: React.FC<TCalculatorDisplayProps> = ({ data }) => {
   let displayContent = '';
   if (data.length > 0) displayContent = data.join('');
   return (

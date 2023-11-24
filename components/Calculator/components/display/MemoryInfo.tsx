@@ -2,7 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { commaSeparateNumber } from '../utils/numbersFormatter';
 
-const MemoryInfo = ({ data='' }) => {
+type TMemoryInfoProps = {
+  data: number;
+}
+
+const MemoryInfo: React.FC<TMemoryInfoProps> = ({ data = '' }) => {
   return (
     <View style={styles.displayWrapper}>
       <View>

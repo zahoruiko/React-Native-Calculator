@@ -1,7 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const CalculatorTitle = ({ isLandscape }) => {
+type TisLandscapeProps = {
+  isLandscape: boolean;
+}
+
+const CalculatorTitle: React.FC<TisLandscapeProps> = ({ isLandscape }) => {
   const styles = isLandscape ? landscapeStyles : portraitStyles;
   return (
     <View style={styles.titleWrapper}>

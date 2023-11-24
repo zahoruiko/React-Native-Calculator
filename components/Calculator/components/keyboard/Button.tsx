@@ -1,7 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageStyle, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 
-const Button = ({ handler, buttonTitle, optionalStyle, isLandscape }) => {
+type TButtonProps = {
+  handler: () => void;
+  buttonTitle: string;
+  optionalStyle: ViewStyle | TextStyle | ImageStyle;
+  isLandscape: boolean;
+}
+
+const Button: React.FC<TButtonProps> = ({ handler, buttonTitle, optionalStyle, isLandscape }) => {
   const styles = isLandscape ? landscapeStyles : portraitStyles;
   return (
     <TouchableOpacity onPress={handler} underlayColor="#FEF5E7" style={styles.buttonStyle}>

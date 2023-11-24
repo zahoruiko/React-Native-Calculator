@@ -1,5 +1,5 @@
 // Source: https://devsting.com/javascript-number-format
-export const commaSeparateNumber = (val) => {
+export const commaSeparateNumber = (val: number) => {
   var sign = 1;
   if (val < 0) {
     sign = -1;
