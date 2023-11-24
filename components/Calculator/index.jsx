@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { commaSeparateNumber } from './components/utils/numbersFormatter';
-import CalculatorUI from './components/CalculatorUI';
+import CalculatorUI from './components/display/CalculatorUI';
 
 function Calculator() {
   const [inputField, setInputField] = useState([]);
   const [accumulator, setAccumulator] = useState(0);
   const [operation, setOperation] = useState('');
   const [calculationsListData, setCalculationsListData] = useState([]);
+  const [calculatorMemory, setCalculatorMemory] = useState(0);
 
   const handleClearAllButton = () => {
     setInputField([]);
@@ -136,12 +137,20 @@ function Calculator() {
       setAccumulator(prevValue => {
         setInputField(() => {
           if (accumulator !== +inputField.join('')) {
-            setCalculationsListData([
-              ...calculationsListData,
-              commaSeparateNumber(+inputField.join('')),
-              value,
-              commaSeparateNumber(prevValue)
-            ]);
+            if (inputField.length > 0) {
+              setCalculationsListData([
+                ...calculationsListData,
+                commaSeparateNumber(+inputField.join('')),
+                value,
+                commaSeparateNumber(prevValue)
+              ]);
+            } else {
+              setCalculationsListData([
+                ...calculationsListData,
+                value,
+                commaSeparateNumber(prevValue)
+              ]);
+            }
           } else {
             setCalculationsListData([
               ...calculationsListData,
@@ -163,16 +172,53 @@ function Calculator() {
     }
   };
 
+  const handleOperationWithMemory = (memoryOperation) => {
+    switch (memoryOperation) {
+      case 'MC': {
+        setCalculatorMemory(0);
+      }; break;
+      case 'MR': {
+        if (operation === '=') {
+          setOperation(() => {
+            setAccumulator(0);
+            return '';
+          });
+          setCalculationsListData([...calculationsListData, '---------------']);
+        } 
+        setInputField([...String(calculatorMemory).split('')]);
+      }; break;
+      case 'M+': {
+        if (inputField.length > 0) {
+          setCalculatorMemory(prevValue => prevValue + +inputField.join(''));
+        } else {
+          setCalculatorMemory(prevValue => prevValue + accumulator);
+        }
+      }; break;
+      case 'M-': {
+        if (inputField.length > 0) {
+          setCalculatorMemory(prevValue => prevValue - +inputField.join(''));
+        } else {
+          setCalculatorMemory(prevValue => prevValue - accumulator);
+        }
+      }; break;
+      default: {
+        return;
+      };
+    }
+  }
+
   return (
     <CalculatorUI
       calculationsListData={calculationsListData}
       inputField={inputField}
       handleClearAllButton={handleClearAllButton}
       handleClearLastButton={handleClearLastButton}
-      handlePercentButton={handlePercentButton}
       handleNumberButton={handleNumberButton}
       handleOperationButton={handleOperationButton}
+      handlePercentButton={handlePercentButton}
       handlePlusMinusButton={handlePlusMinusButton}
+      handleOperationWithMemory={handleOperationWithMemory}
+      memoryInfoData={calculatorMemory}
     />
   );
 }

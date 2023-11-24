@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const Button = ({ handler, buttonTitle, optionalStyle, isLandscape }) => {
   const styles = isLandscape ? landscapeStyles : portraitStyles;
   return (
-    <TouchableHighlight onPress={handler} underlayColor="#FEF5E7" style={styles.buttonStyle}>
+    <TouchableOpacity onPress={handler} underlayColor="#FEF5E7" style={styles.buttonStyle}>
       <View style={styles.buttonTextWrapper}>
         <Text style={[styles.buttonTitle, optionalStyle]}>{buttonTitle}</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
+    
   );
 };
 
@@ -18,7 +19,7 @@ const portraitStyles = StyleSheet.create({
   buttonStyle: {
     margin: 0,
     padding: 0,
-    height: 50
+    height: 40
   },
   buttonTextWrapper: {
     alignItems: 'center',
@@ -51,7 +52,7 @@ const landscapeStyles = StyleSheet.create({
   buttonStyle: {
     margin: 0,
     padding: 0,
-    height: 50
+    height: 40
   },
   buttonTextWrapper: {
     alignItems: 'center',

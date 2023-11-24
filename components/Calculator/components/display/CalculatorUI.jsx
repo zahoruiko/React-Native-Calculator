@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import { Dimensions, SafeAreaView, StyleSheet } from 'react-native';
-import Button from './Button';
-import ButtonsRowWrapper from './ButtonsRowWrapper';
+import Button from '../keyboard/Button';
+import ButtonsRowWrapper from '../keyboard/ButtonsRowWrapper';
 import CalculationsList from './CalculationsList';
 import CalculatorDisplay from './CalculatorDisplay';
-import CalculatorTitle from './CalculatorTitle';
-import CalculatorUIWrapper from './CalculatorUIWrapper';
+import CalculatorTitle from '../CalculatorTitle';
+import CalculatorUIWrapper from '../CalculatorUIWrapper';
 import DisplayWrapper from './DisplayWrapper';
-import KeyboardWrapper from './KeyboardWrapper';
+import KeyboardWrapper from '../keyboard/KeyboardWrapper';
+import MemoryInfo from './MemoryInfo';
 
 function CalculatorUI({
   calculationsListData,
   inputField,
   handleClearAllButton,
   handleClearLastButton,
-  handlePercentButton,
   handleNumberButton,
   handleOperationButton,
-  handlePlusMinusButton
+  handlePercentButton,
+  handlePlusMinusButton,
+  handleOperationWithMemory,
+  memoryInfoData
 }) {
   const [isLandscape, setIsLandscape] = useState(false);
 
@@ -25,10 +28,8 @@ function CalculatorUI({
     const { width, height } = Dimensions.get('window');
     if (width > height) {
       setIsLandscape(true);
-      console.log('Landscape');
     } else {
       setIsLandscape(false);
-      console.log('Portrait');
     }
   };
 
@@ -37,10 +38,37 @@ function CalculatorUI({
       <CalculatorUIWrapper isLandscape={isLandscape}>
         <DisplayWrapper>
           <CalculatorTitle isLandscape={isLandscape} />
+          <MemoryInfo data={memoryInfoData} />
           <CalculationsList data={calculationsListData} />
           <CalculatorDisplay data={inputField} />
         </DisplayWrapper>
         <KeyboardWrapper isLandscape={isLandscape}>
+          <ButtonsRowWrapper>
+            <Button
+              handler={() => handleOperationWithMemory('MC')}
+              buttonTitle={'MC'}
+              optionalStyle={styles.memoryButton}
+              isLandscape={isLandscape}
+            />
+            <Button
+              handler={() => handleOperationWithMemory('MR')}
+              buttonTitle={'MR'}
+              optionalStyle={styles.memoryButton}
+              isLandscape={isLandscape}
+            />
+            <Button
+              handler={() => handleOperationWithMemory('M+')}
+              buttonTitle={'M+'}
+              optionalStyle={styles.memoryButton}
+              isLandscape={isLandscape}
+            />
+            <Button
+              handler={() => handleOperationWithMemory('M-')}
+              buttonTitle={'M-'}
+              optionalStyle={styles.memoryButton}
+              isLandscape={isLandscape}
+            />
+          </ButtonsRowWrapper>
           <ButtonsRowWrapper>
             <Button
               handler={() => handleClearAllButton()}
@@ -193,6 +221,11 @@ const styles = StyleSheet.create({
     color: '#2E86C1'
   },
   clearButton: {
-    color: '#A93226'
+    color: '#A93226',
+    fontSize: 21
+  },
+  memoryButton: {
+    color: 'darkorange',
+    fontSize: 19
   }
 });
